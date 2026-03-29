@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lo siento, Daniela 🐱💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rosa: #f9a8c0;
+  --rosa2: #e8729a;
+  --rosa3: #c0395f;
+  --lavanda: #c9b1e8;
+  --lavanda2: #a07fd4;
+  --melocoton: #fde3c8;
+  --dorado: #f5c97a;
+  --cafe: #5c3d2e;
+  --cafe2: #8b6355;
+  --crema: #fff8f3;
+  --blanco: #fffcf8;
+  --verde: #a8d8a0;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--crema);
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--cafe);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CURSOR PERSONALIZADO ── */
+#cursor {
+  position: fixed;
+  width: 28px; height: 28px;
+  font-size: 1.4rem;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s ease;
+}
+#cursor-trail {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  top:0;left:0;
+  width:100%;height:100%;
+}
+
+/* ── PANTALLA DE INTRO ── */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #1a0a0f 0%, #2d0f1f 50%, #1a0a0f 100%);
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.2s ease, visibility 1.2s ease;
+}
+#intro.fade-out { opacity:0; visibility:hidden; }
+
+.intro-cat {
+  font-size: 6rem;
+  animation: introCat 1.5s ease infinite alternate;
+  margin-bottom: 1.5rem;
+}
+@keyframes introCat {
+  from { transform: scale(0.9) rotate(-5deg); filter: drop-shadow(0 0 15px #f9a8c055); }
+  to   { transform: scale(1.1) rotate(5deg);  filter: drop-shadow(0 0 40px #f9a8c0aa); }
+}
+.intro-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--rosa);
+  text-align: center;
+  margin-bottom: 0.5rem;
+  animation: fadeIn 2s ease;
+}
+.intro-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: rgba(255,255,255,0.5);
+  font-size: 1rem;
+  margin-bottom: 2.5rem;
+  animation: fadeIn 2.5s ease;
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+.intro-btn {
+  background: linear-gradient(135deg, var(--rosa), var(--rosa2));
+  color: white;
+  border: none;
+  padding: 0.9rem 2.8rem;
+  border-radius: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 0 30px rgba(249,168,192,0.5);
+  transition: all 0.3s ease;
+  animation: pulse 2s ease infinite;
+}
+.intro-btn:hover { transform: scale(1.08); box-shadow: 0 0 50px rgba(249,168,192,0.8); }
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 30px rgba(249,168,192,0.5); }
+  50%      { box-shadow: 0 0 60px rgba(249,168,192,0.9); }
+}
+
+/* ── FONDO MÁGICO ── */
+#magic-bg {
+  position: fixed; inset:0; z-index:0; pointer-events:none;
+  background: radial-gradient(ellipse at 20% 30%, #fce4ec22, transparent 60%),
+              radial-gradient(ellipse at 80% 70%, #e8d5f522, transparent 60%),
+              radial-gradient(ellipse at 50% 50%, #fde3c815, transparent 70%);
+}
+canvas#particles {
+  position: fixed; inset:0; z-index:1; pointer-events:none;
+}
+
+/* ── CONTENIDO ── */
+.page { position:relative; z-index:2; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  position: relative;
+}
+
+.hero-cats-orbit {
+  position: relative;
+  width: 220px; height: 220px;
+  margin-bottom: 2rem;
+}
+.orbit-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 5rem;
+  animation: beatHeart 1.5s ease infinite;
+  filter: drop-shadow(0 0 20px rgba(249,168,192,0.8));
+}
+@keyframes beatHeart {
+  0%,100% { transform: translate(-50%,-50%) scale(1); }
+  15%      { transform: translate(-50%,-50%) scale(1.2); }
+  30%      { transform: translate(-50%,-50%) scale(1); }
+  45%      { transform: translate(-50%,-50%) scale(1.1); }
+}
+.orbit-cat {
+  position: absolute;
+  font-size: 2rem;
+  top: 50%; left: 50%;
+  transform-origin: 0 0;
+  animation: orbitAnim linear infinite;
+}
+.orbit-cat:nth-child(2) { animation-duration: 6s;  margin: -1rem; }
+.orbit-cat:nth-child(3) { animation-duration: 8s;  margin: -1rem; animation-direction: reverse; }
+.orbit-cat:nth-child(4) { animation-duration: 10s; margin: -1rem; }
+.orbit-cat:nth-child(5) { animation-duration: 7s;  margin: -1rem; animation-direction: reverse; }
+@keyframes orbitAnim {
+  from { transform: rotate(0deg) translateX(90px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(90px) rotate(-360deg); }
+}
+
+.hero-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  color: var(--rosa2);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+  text-shadow: 0 4px 20px rgba(232,114,154,0.3);
+  animation: glowName 3s ease infinite alternate;
+}
+@keyframes glowName {
+  from { text-shadow: 0 4px 20px rgba(232,114,154,0.3); }
+  to   { text-shadow: 0 4px 40px rgba(232,114,154,0.7), 0 0 80px rgba(232,114,154,0.2); }
+}
+.hero-sub {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  color: var(--cafe2);
+  margin-bottom: 2rem;
+}
+.scroll-hint {
+  margin-top: 3rem;
+  font-size: 0.85rem;
+  color: var(--cafe2);
+  font-style: italic;
+  animation: bounce2 2s ease infinite;
+  letter-spacing: 0.1em;
+}
+.scroll-hint span { display:block; font-size:1.5rem; }
+@keyframes bounce2 {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(8px); }
+}
+
+/* ── SECCIONES ── */
+section {
+  padding: 5rem 1.5rem;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.section-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--rosa), var(--lavanda));
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.35rem 1.2rem;
+  border-radius: 50px;
+  margin-bottom: 1.2rem;
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: var(--cafe);
+  line-height: 1.25;
+  margin-bottom: 1rem;
+}
+.section-title em { color: var(--rosa2); font-style: italic; }
+
+/* ── CARTA PRINCIPAL ── */
+.carta {
+  background: var(--blanco);
+  border-radius: 32px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 60px rgba(92,61,46,0.1), 0 4px 15px rgba(249,168,192,0.15);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+.carta::before {
+  content: '';
+  position: absolute;
+  top:0;left:0;right:0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--rosa), var(--lavanda), var(--dorado), var(--rosa));
+  background-size: 200%;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer { from{background-position:0%} to{background-position:200%} }
+.carta::after {
+  content: '🐱';
+  position: absolute;
+  bottom: -10px; right: 10px;
+  font-size: 8rem;
+  opacity: 0.04;
+  pointer-events: none;
+}
+.carta-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 2;
+  color: var(--cafe);
+}
+.carta-text p { margin-bottom: 1.2rem; }
+.carta-text strong { color: var(--rosa2); font-style: italic; font-weight: 600; }
+.firma {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--rosa2);
+  text-align: right;
+  margin-top: 1.5rem;
+}
+
+/* ── LÍNEA DE TIEMPO DE PROMESAS ── */
+.timeline {
+  position: relative;
+  padding-left: 2.5rem;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0.6rem;
+  top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--rosa), var(--lavanda), var(--dorado));
+  border-radius: 2px;
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.tl-item.visible { opacity:1; transform:translateX(0); }
+.tl-dot {
+  position: absolute;
+  left: -2.1rem;
+  top: 0.2rem;
+  width: 1.3rem; height: 1.3rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rosa), var(--rosa2));
+  box-shadow: 0 0 0 4px var(--crema), 0 0 15px rgba(249,168,192,0.5);
+  display: flex; align-items:center; justify-content:center;
+  font-size: 0.7rem;
+}
+.tl-content {
+  background: white;
+  border-radius: 18px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(92,61,46,0.08);
+  border-left: 3px solid var(--rosa);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.tl-content:hover {
+  transform: translateX(6px);
+  box-shadow: 0 8px 30px rgba(249,168,192,0.25);
+}
+.tl-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--rosa2);
+  margin-bottom: 0.4rem;
+}
+.tl-desc {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--cafe2);
+}
+
+/* ── GALERÍA DE GATITOS ── */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+.cat-tile {
+  background: white;
+  border-radius: 24px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(92,61,46,0.08);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+  overflow: hidden;
+}
+.cat-tile::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(249,168,192,0.1), rgba(201,177,232,0.1));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.cat-tile:hover { transform: translateY(-12px) rotate(3deg); box-shadow: 0 20px 40px rgba(249,168,192,0.35); }
+.cat-tile:hover::before { opacity: 1; }
+.cat-tile:nth-child(even):hover { transform: translateY(-12px) rotate(-3deg); }
+.cat-face {
+  font-size: 3.2rem;
+  display: block;
+  margin-bottom: 0.6rem;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+.cat-tile:hover .cat-face { transform: scale(1.3) rotate(-10deg); }
+.cat-label {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--cafe2);
+  line-height: 1.4;
+}
+.cat-msg {
+  font-size: 0.7rem;
+  color: var(--rosa2);
+  margin-top: 0.3rem;
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-style: italic;
+}
+.cat-tile:hover .cat-msg { opacity: 1; }
+
+/* ── CONTADOR DE AMOR ── */
+.counters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+.counter-card {
+  background: white;
+  border-radius: 20px;
+  padding: 1.8rem 1rem;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(92,61,46,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.counter-card::after {
+  content: '';
+  position: absolute; inset:0;
+  background: linear-gradient(135deg, transparent 70%, rgba(249,168,192,0.15));
+}
+.counter-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--rosa2);
+  display: block;
+  font-weight: 900;
+}
+.counter-label {
+  font-size: 0.82rem;
+  color: var(--cafe2);
+  font-style: italic;
+  margin-top: 0.3rem;
+}
+.counter-icon { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
+
+/* ── PIANO DE AMOR ── */
+.piano-section {
+  background: linear-gradient(135deg, #1a0a0f, #2d0f1f);
+  border-radius: 32px;
+  padding: 2.5rem;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.piano-section h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--rosa);
+}
+.piano-section p { font-size:0.9rem; opacity:0.7; margin-bottom: 1.5rem; }
+.piano-keys {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.piano-key {
+  background: linear-gradient(to bottom, #fffcf8, #f0e8e0);
+  border-radius: 0 0 10px 10px;
+  width: 44px; height: 110px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 -2px 5px rgba(0,0,0,0.1);
+  transition: all 0.1s ease;
+  position: relative;
+  display: flex; align-items:flex-end; justify-content:center;
+  padding-bottom: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--cafe2);
+  font-style: italic;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.piano-key:hover, .piano-key.active {
+  background: linear-gradient(to bottom, var(--rosa), var(--rosa2));
+  transform: scaleY(0.95) translateY(3px);
+  color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+.piano-note {
+  position: absolute;
+  top: -40px;
+  font-size: 1.5rem;
+  animation: noteUp 1s ease forwards;
+  pointer-events: none;
+}
+@keyframes noteUp {
+  from { opacity:1; transform: translateY(0) rotate(0deg); }
+  to   { opacity:0; transform: translateY(-60px) rotate(30deg); }
+}
+
+/* ── SECCIÓN FINAL ── */
+.final-section {
+  background: linear-gradient(135deg, var(--rosa2) 0%, #c0395f 50%, var(--lavanda2) 100%);
+  border-radius: 40px;
+  padding: 4rem 2.5rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(192,57,95,0.35);
+  margin: 0 0 4rem;
+}
+.final-section::before {
+  content: '';
+  position: absolute; inset:0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.final-cats-row {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  animation: rowDance 3s ease infinite;
+  letter-spacing: 0.3rem;
+}
+@keyframes rowDance {
+  0%,100% { transform: translateY(0); }
+  25%      { transform: translateY(-8px); }
+  75%      { transform: translateY(4px); }
+}
+.final-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.5rem, 7vw, 4rem);
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.final-text {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  line-height: 2;
+  opacity: 0.95;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+}
+
+/* ── BOTÓN MÁGICO ── */
+.magic-btn {
+  position: relative;
+  background: white;
+  color: var(--rosa2);
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  overflow: hidden;
+}
+.magic-btn::before {
+  content: '';
+  position: absolute; inset:0;
+  background: linear-gradient(135deg, var(--rosa), var(--dorado), var(--lavanda));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.magic-btn:hover { transform: scale(1.12); box-shadow: 0 15px 40px rgba(0,0,0,0.3); color: white; }
+.magic-btn:hover::before { opacity: 1; }
+.magic-btn span { position: relative; z-index:1; }
+.magic-btn.clicked { animation: celebrate 0.6s ease; }
+@keyframes celebrate {
+  0%   { transform: scale(1); }
+  25%  { transform: scale(1.3) rotate(-5deg); }
+  50%  { transform: scale(1.1) rotate(5deg); }
+  75%  { transform: scale(1.2) rotate(-3deg); }
+  100% { transform: scale(1); }
+}
+#response-text {
+  margin-top: 1.5rem;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  min-height: 2.5rem;
+  transition: all 0.5s ease;
+}
+
+/* ── ANIMACIONES DE ENTRADA ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── FOOTER ── */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--cafe2);
+  font-size: 0.9rem;
+  font-style: italic;
+  position: relative; z-index:2;
+}
+
+/* ── EXPLOSIÓN DE CONFETI ── */
+.confetti-piece {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 3px;
+  animation: confettiFall linear forwards;
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(0) rotate(0deg); opacity:1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
+}
+
+/* ── SCROLL PROGRESS ── */
+#progress-bar {
+  position: fixed;
+  top:0; left:0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--rosa), var(--lavanda), var(--dorado));
+  z-index: 9000;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 10px rgba(249,168,192,0.8);
+}
+
+/* responsive */
+@media(max-width:600px){
+  section { padding: 3rem 1rem; }
+  .carta  { padding: 2rem 1.5rem; }
+  .piano-key { width:36px; height:90px; }
+  .final-section { padding:2.5rem 1.5rem; border-radius:28px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Barra de progreso -->
+<div id="progress-bar"></div>
+
+<!-- Cursor personalizado -->
+<div id="cursor">🐾</div>
+<canvas id="cursor-trail"></canvas>
+
+<!-- Pantalla de intro -->
+<div id="intro">
+  <div class="intro-cat">🐱</div>
+  <h1 class="intro-title">Para Daniela,<br>con todo mi corazón</h1>
+  <p class="intro-sub">una disculpa hecha con amor y gatitos</p>
+  <button class="intro-btn" onclick="startPage()">🌸 Abrir carta 🌸</button>
+</div>
+
+<!-- Fondo mágico -->
+<div id="magic-bg"></div>
+<canvas id="particles"></canvas>
+
+<div class="page" id="mainPage" style="opacity:0;transition:opacity 1s ease">
+
+  <!-- ══ HERO ══ -->
+  <div class="hero">
+    <div class="hero-cats-orbit">
+      <span class="orbit-center">💕</span>
+      <span class="orbit-cat">🐱</span>
+      <span class="orbit-cat">🌸</span>
+      <span class="orbit-cat">🐾</span>
+      <span class="orbit-cat">✨</span>
+    </div>
+    <h1 class="hero-name">Daniela</h1>
+    <p class="hero-sub">lo siento muchísimo, de verdad</p>
+    <p class="scroll-hint">
+      <span>🐾</span>
+      sigue leyendo
+    </p>
+  </div>
+
+  <!-- ══ CARTA ══ -->
+  <section class="reveal">
+    <div class="section-badge">💌 Carta de corazón</div>
+    <h2 class="section-title">Lo que <em>necesito</em> decirte</h2>
+    <div class="carta">
+      <div class="carta-text">
+        <p>
+          Daniela, antes de que leas esto quiero que sepas que cada palabra
+          que encontrarás aquí viene del lugar más sincero que tengo.
+          No hay excusas, no hay justificaciones. Solo <strong>la verdad</strong>.
+        </p>
+        <p>
+          Me equivoqué. Mi comportamiento no estuvo bien, y lo reconozco completamente.
+          Sé que te lastimé, y eso me pesa de una manera que no puedo describir.
+          Mereces alguien que te trate como el tesoro que eres, y en ese momento
+          no fui esa persona.
+        </p>
+        <p>
+          Quiero arreglarlo todo. No porque me sienta obligado/a,
+          sino porque <strong>tú vales la pena</strong>. Porque lo que tenemos vale la pena.
+          Y porque cuando pienso en perder esto, el corazón se me encoge.
+        </p>
+        <p>
+          Si me das la oportunidad de demostrarte que puedo ser mejor,
+          voy a tomarla con ambas manos y no voy a soltarla.
+          Te lo prometo, Daniela. Con mi palabra y con mis actos.
+        </p>
+      </div>
+      <div class="firma">— Con todo mi amor 🐱</div>
+    </div>
+  </section>
+
+  <!-- ══ PROMESAS ══ -->
+  <section class="reveal">
+    <div class="section-badge">✨ Mi palabra</div>
+    <h2 class="section-title">Mis <em>promesas</em> para ti</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">🐱</div>
+        <div class="tl-content">
+          <div class="tl-title">Reconozco mis errores</div>
+          <div class="tl-desc">Me comprometo a reflexionar honestamente sobre lo que hice mal, sin ponerme a la defensiva ni buscar excusas. Aceptar mi error es el primer paso.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🌸</div>
+        <div class="tl-content">
+          <div class="tl-title">Te escucho de verdad</div>
+          <div class="tl-desc">Prometo escucharte con atención y sin interrumpirte. Lo que sientes y piensas importa, y quiero entenderte mejor que nunca.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">💛</div>
+        <div class="tl-content">
+          <div class="tl-title">Lo demuestro con hechos</div>
+          <div class="tl-desc">Las palabras son bonitas, pero los hechos son lo que valen. Prometo demostrarte cada día, con acciones concretas, que esto me importa.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">🐾</div>
+        <div class="tl-content">
+          <div class="tl-title">Trabajo en mí mismo/a</div>
+          <div class="tl-desc">Voy a crecer y mejorar, porque mereces la mejor versión de mí. No voy a repetir los mismos errores. Eso te lo juro.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">💕</div>
+        <div class="tl-content">
+          <div class="tl-title">Te cuido y te respeto siempre</div>
+          <div class="tl-desc">Prometo tratarte con el cariño, la ternura y el respeto que mereces absolutamente todos los días. Nunca menos que eso.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ GATITOS ══ -->
+  <section class="reveal">
+    <div class="section-badge">🐱 Pandilla gatuna</div>
+    <h2 class="section-title">Los gatitos que también<br>te piden <em>perdón</em></h2>
+    <p style="color:var(--cafe2);font-style:italic;font-size:0.95rem;margin-bottom:0.5rem">Pásales el mouse (¡o tócalos!) para ver su mensaje 🐾</p>
+    <div class="gallery">
+      <div class="cat-tile"><span class="cat-face">😿</span><div class="cat-label">Micho Arrepentido</div><div class="cat-msg">¡Lo siento!</div></div>
+      <div class="cat-tile"><span class="cat-face">🐈</span><div class="cat-label">Gato Esperanza</div><div class="cat-msg">¡Dale otra oportunidad!</div></div>
+      <div class="cat-tile"><span class="cat-face">😸</span><div class="cat-label">Ronrón Alegre</div><div class="cat-msg">¡Seremos felices!</div></div>
+      <div class="cat-tile"><span class="cat-face">😽</span><div class="cat-label">Besito Gatuno</div><div class="cat-msg">¡Muaaak!</div></div>
+      <div class="cat-tile"><span class="cat-face">🐾</span><div class="cat-label">Patitas de Paz</div><div class="cat-msg">¡Perdonaló/la!</div></div>
+      <div class="cat-tile"><span class="cat-face">🙀</span><div class="cat-label">Michi Sorpresa</div><div class="cat-msg">¡No lo creo!</div></div>
+      <div class="cat-tile"><span class="cat-face">😻</span><div class="cat-label">Corazón Felino</div><div class="cat-msg">¡Te quieren!</div></div>
+      <div class="cat-tile"><span class="cat-face">🐱</span><div class="cat-label">Michito Amor</div><div class="cat-msg">¡Todo va bien!</div></div>
+    </div>
+  </section>
+
+  <!-- ══ CONTADORES ══ -->
+  <section class="reveal">
+    <div class="section-badge">💫 En números</div>
+    <h2 class="section-title">Cuánto <em>importas</em></h2>
+    <div class="counters">
+      <div class="counter-card"><span class="counter-icon">💕</span><span class="counter-num" data-target="1000000">0</span><div class="counter-label">veces que pienso en ti</div></div>
+      <div class="counter-card"><span class="counter-icon">🙏</span><span class="counter-num" data-target="100">0</span><div class="counter-label">% arrepentido/a</div></div>
+      <div class="counter-card"><span class="counter-icon">🐱</span><span class="counter-num" data-target="8">0</span><div class="counter-label">gatitos de tu lado</div></div>
+      <div class="counter-card"><span class="counter-icon">✨</span><span class="counter-num" data-target="5">0</span><div class="counter-label">promesas de corazón</div></div>
+    </div>
+  </section>
+
+  <!-- ══ PIANO ══ -->
+  <section class="reveal">
+    <div class="piano-section">
+      <h3>🎹 Toca una melodía para Daniela</h3>
+      <p>Cada tecla tiene un mensaje especial 🐾</p>
+      <div class="piano-keys" id="piano">
+        <div class="piano-key" data-note="Lo" data-emoji="💕">Lo</div>
+        <div class="piano-key" data-note="sien" data-emoji="🌸">sien</div>
+        <div class="piano-key" data-note="to" data-emoji="🐱">to</div>
+        <div class="piano-key" data-note="mu" data-emoji="✨">mu</div>
+        <div class="piano-key" data-note="cho" data-emoji="🙏">cho</div>
+        <div class="piano-key" data-note="Da" data-emoji="💛">Da</div>
+        <div class="piano-key" data-note="nie" data-emoji="🐾">nie</div>
+        <div class="piano-key" data-note="la" data-emoji="💖">la</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FINAL ══ -->
+  <section style="padding:0 1.5rem 2rem">
+    <div class="final-section reveal">
+      <div class="final-cats-row">🐱 🐾 🌸 💕 ✨ 🐱 🐾 🌸</div>
+      <h2 class="final-title">¿Me perdonas,<br>Daniela?</h2>
+      <p class="final-text">
+        Estoy aquí, con el corazón abierto, con mis errores reconocidos
+        y con toda mi voluntad de hacer las cosas bien.
+        Contigo todo tiene más sentido. 🐱💕
+      </p>
+      <button class="magic-btn" id="perdonBtn" onclick="handlePerdon()">
+        <span>💛 Sí, te perdono 🐱</span>
+      </button>
+      <div id="response-text"></div>
+    </div>
+  </section>
+
+  <footer>
+    Hecho con arrepentimiento genuino, mucho amor y muchos gatitos 🐾💕<br>
+    <span style="font-size:0.75rem;opacity:0.6">Solo para Daniela · con el corazón en la mano</span>
+  </footer>
+
+</div><!-- end .page -->
+
+<script>
+/* ─── INTRO ─── */
+function startPage() {
+  document.getElementById('intro').classList.add('fade-out');
+  const page = document.getElementById('mainPage');
+  setTimeout(() => { page.style.opacity = '1'; }, 600);
+  setTimeout(initParticles, 800);
+}
+
+/* ─── CURSOR PERSONALIZADO ─── */
+const cursorEl = document.getElementById('cursor');
+const trailCanvas = document.getElementById('cursor-trail');
+const trailCtx = trailCanvas.getContext('2d');
+let mouseX=0, mouseY=0, points=[];
+
+trailCanvas.width = window.innerWidth;
+trailCanvas.height = window.innerHeight;
+window.addEventListener('resize', () => {
+  trailCanvas.width = window.innerWidth;
+  trailCanvas.height = window.innerHeight;
+});
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX; mouseY = e.clientY;
+  cursorEl.style.left = mouseX + 'px';
+  cursorEl.style.top  = mouseY + 'px';
+  points.push({ x: mouseX, y: mouseY, life: 1, emoji: Math.random() > 0.7 ? '💕' : '·' });
+  if (points.length > 40) points.shift();
+});
+
+function drawTrail() {
+  trailCtx.clearRect(0, 0, trailCanvas.width, trailCanvas.height);
+  points.forEach((p, i) => {
+    p.life -= 0.03;
+    if (p.life <= 0) return;
+    trailCtx.globalAlpha = p.life * 0.5;
+    trailCtx.fillStyle = `hsl(${330 + i * 2}, 80%, 70%)`;
+    trailCtx.beginPath();
+    trailCtx.arc(p.x, p.y, p.life * 4, 0, Math.PI*2);
+    trailCtx.fill();
+  });
+  requestAnimationFrame(drawTrail);
+}
+drawTrail();
+
+/* ─── PARTÍCULAS ─── */
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  const emojis = ['🐱','🌸','💕','🐾','✨','💛','🌷'];
+  const particles = Array.from({length:25}, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    size: 0.5 + Math.random() * 1.5,
+    emoji: emojis[Math.floor(Math.random()*emojis.length)],
+    vx: (Math.random()-0.5) * 0.4,
+    vy: -0.2 - Math.random() * 0.5,
+    opacity: 0.1 + Math.random() * 0.3,
+    rot: Math.random() * 360,
+    rotV: (Math.random()-0.5) * 1,
+  }));
+
+  function animPart() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.rot += p.rotV;
+      if (p.y < -30) { p.y = canvas.height + 30; p.x = Math.random()*canvas.width; }
+      ctx.save();
+      ctx.globalAlpha = p.opacity;
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI/180);
+      ctx.font = `${p.size * 20}px serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(p.emoji, 0, 0);
+      ctx.restore();
+    });
+    requestAnimationFrame(animPart);
+  }
+  animPart();
+}
+
+/* ─── PROGRESS BAR ─── */
+window.addEventListener('scroll', () => {
+  const s = document.documentElement;
+  const pct = (s.scrollTop / (s.scrollHeight - s.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+/* ─── REVEAL ON SCROLL ─── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.querySelectorAll('.tl-item').forEach(el => observer.observe(el));
+
+/* ─── CONTADORES ANIMADOS ─── */
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const target = +el.dataset.target;
+    let current = 0;
+    const step = target / 60;
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = target >= 100000
+        ? (current/1000000).toFixed(1) + 'M'
+        : Math.floor(current) + (el.parentElement.querySelector('.counter-label').textContent.includes('%') ? '%' : '');
+    }, 25);
+    counterObs.unobserve(el);
+  });
+});
+document.querySelectorAll('.counter-num').forEach(el => counterObs.observe(el));
+
+/* ─── PIANO ─── */
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const noteFreqs = [261.63, 293.66, 329.63, 349.23, 392, 440, 493.88, 523.25];
+
+document.querySelectorAll('.piano-key').forEach((key, i) => {
+  key.addEventListener('click', () => {
+    // Sonido
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.frequency.value = noteFreqs[i];
+    osc.type = 'sine';
+    gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.5);
+    osc.start(); osc.stop(audioCtx.currentTime + 1.5);
+
+    // Animación
+    key.classList.add('active');
+    setTimeout(() => key.classList.remove('active'), 200);
+
+    // Emoji flotante
+    const note = document.createElement('span');
+    note.className = 'piano-note';
+    note.textContent = key.dataset.emoji;
+    key.appendChild(note);
+    setTimeout(() => note.remove(), 1000);
+  });
+});
+
+/* ─── BOTÓN PERDÓN + CONFETI ─── */
+const responses = [
+  "¡Gracias, Daniela! 🐱💕 ¡Lo haré valer cada día!",
+  "¡Eres lo mejor! 🌸 ¡Ronrón de felicidad infinita!",
+  "¡Te lo juro! 🐾 ¡Voy a ser la mejor versión de mí!",
+  "¡Gracias, gracias, gracias! 😸💛 ¡No te fallaré!",
+  "¡Los gatitos y yo te amamos mucho! 🐱🐱🐱"
+];
+let perdonClicked = false;
+
+function handlePerdon() {
+  const btn = document.getElementById('perdonBtn');
+  const resp = document.getElementById('response-text');
+  btn.classList.add('clicked');
+  setTimeout(() => btn.classList.remove('clicked'), 600);
+
+  if (!perdonClicked) {
+    perdonClicked = true;
+    btn.querySelector('span').textContent = '🐱 ¡Siempre! 💕';
+  }
+  resp.textContent = responses[Math.floor(Math.random() * responses.length)];
+  spawnConfetti(80);
+}
+
+function spawnConfetti(n) {
+  const colors = ['#f9a8c0','#e8729a','#c9b1e8','#f5c97a','#a8d8a0','#fde3c8'];
+  const shapes = ['🐱','🌸','💕','🐾','✨','💛'];
+  for (let i = 0; i < n; i++) {
+    setTimeout(() => {
+      const el = document.createElement('div');
+      el.className = 'confetti-piece';
+      const useEmoji = Math.random() > 0.5;
+      if (useEmoji) {
+        el.textContent = shapes[Math.floor(Math.random()*shapes.length)];
+        el.style.fontSize = (0.8 + Math.random()*1.2) + 'rem';
+        el.style.background = 'transparent';
+      } else {
+        el.style.width = (6 + Math.random()*8) + 'px';
+        el.style.height = (6 + Math.random()*8) + 'px';
+        el.style.background = colors[Math.floor(Math.random()*colors.length)];
+        el.style.borderRadius = Math.random() > 0.5 ? '50%' : '3px';
+      }
+      el.style.left = (10 + Math.random() * 80) + 'vw';
+      el.style.top = '-20px';
+      const dur = 1.5 + Math.random() * 2;
+      el.style.animationDuration = dur + 's';
+      el.style.animationDelay = (Math.random() * 0.5) + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), (dur + 1) * 1000);
+    }, i * 20);
+  }
+}
+
+// Auto‑iniciar si es mobile (no hay hover)
+if ('ontouchstart' in window) {
+  startPage();
+}
+</script>
+</body>
+</html>
